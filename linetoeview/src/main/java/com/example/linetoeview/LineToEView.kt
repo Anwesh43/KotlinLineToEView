@@ -110,4 +110,27 @@ class LineToEView (ctx : Context) : View(ctx) {
             state.startUpdating(startcb)
         }
     }
+
+    data class Renderer(var view : LineToEView) {
+
+        private val animator : Animator = Animator(view)
+
+        private val lineToE : LineToE = LineToE(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(Color.parseColor("#212121"))
+            lineToE.draw(canvas, paint)
+            animator.animate {
+                lineToE.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            lineToE.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
