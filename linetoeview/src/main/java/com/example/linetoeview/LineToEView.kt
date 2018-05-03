@@ -93,7 +93,7 @@ class LineToEView (ctx : Context) : View(ctx) {
             paint.strokeCap = Paint.Cap.ROUND
             paint.color = Color.parseColor("#1abc9c")
             canvas.save()
-            canvas.translate(w/2, h/2)
+            canvas.translate(w / 2 - size / 2, h/2)
             canvas.drawLine(0f, -size, 0f, size, paint)
             for (i in 0..2) {
                 canvas.save()
