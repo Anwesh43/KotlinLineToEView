@@ -78,6 +78,36 @@ class LineToEView (ctx : Context) : View(ctx) {
                 animated = false
             }
         }
+    }
 
+    data class LineToE (var i : Int, val state : State = State()) {
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            val w : Float = canvas.width.toFloat()
+            val h : Float = canvas.height.toFloat()
+            val size : Float = Math.min(w, h)/3
+            paint.strokeWidth = size / 20
+            paint.strokeCap = Paint.Cap.ROUND
+            paint.color = Color.parseColor("#1abc9c")
+            canvas.save()
+            canvas.translate(w/2, h/2)
+            canvas.drawLine(0f, -size, 0f, size, paint)
+            for (i in 0..2) {
+                canvas.save()
+                canvas.rotate(90f * state.scales[0])
+                val x : Float = (i - 1) * size * state.scales[1]
+                canvas.drawLine(x, 0f, x, -size, paint)
+                canvas.restore()
+            }
+            canvas.restore()
+        }
+
+        fun update(stopcb : (Float) -> Unit) {
+            state.update(stopcb)
+        }
+
+        fun startUpdating(startcb : () -> Unit) {
+            state.startUpdating(startcb)
+        }
     }
 }
