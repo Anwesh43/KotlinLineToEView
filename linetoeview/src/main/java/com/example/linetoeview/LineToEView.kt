@@ -4,6 +4,7 @@ package com.example.linetoeview
  * Created by anweshmishra on 03/05/18.
  */
 
+import android.app.Activity
 import android.graphics.*
 import android.content.Context
 import android.view.View
@@ -133,6 +134,14 @@ class LineToEView (ctx : Context) : View(ctx) {
             lineToE.startUpdating {
                 animator.start()
             }
+        }
+    }
+
+    companion object {
+        fun create(activity : Activity) : LineToEView {
+            val view : LineToEView = LineToEView(activity)
+            activity.setContentView(view)
+            return view
         }
     }
 }
